@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: coze-teams-bot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: "python app.py"
+    envVars:
+      - key: COZE_CLIENT_ID
+        value: "your-client-id"
+      - key: COZE_PUBLIC_KEY_ID
+        value: "your-key-id"
+      - key: COZE_PRIVATE_KEY
+        value: |
+          -----BEGIN PRIVATE KEY-----
+          YOUR-PRIVATE-KEY-HERE
+          -----END PRIVATE KEY-----
+      - key: COZE_BOT_ID
+        value: "your-bot-id"
