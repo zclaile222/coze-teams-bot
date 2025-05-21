@@ -11,6 +11,7 @@ import os
 import time
 import jwt
 import uuid
+import json
 
 app = Flask(__name__)
 
@@ -69,7 +70,13 @@ def get_access_token():
 @app.route("/api/messages", methods=["POST"])
 def messages():
     data = request.get_json()
-    user_text = data.get("text")
+    print("[完整消息体]", json.dumps(data, indent=2, ensure_ascii=False))
+
+    user_text = data.get("text") or \
+                (data.get("value") or {}).get("text") or \
+                (data.get("channelData") or {}).get("text") or \
+                None
+
     print(f"[收到消息] {user_text}")
 
     if not user_text:
