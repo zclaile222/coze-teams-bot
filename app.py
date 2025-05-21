@@ -69,7 +69,12 @@ def get_access_token():
 @app.route("/api/messages", methods=["POST"])
 def messages():
     data = request.get_json()
-    user_text = data.get("text", "")
+    user_text = data.get("text")
+    print(f"[收到消息] {user_text}")
+
+    if not user_text:
+        print("[跳过] 未收到有效文本内容")
+        return "", 200
 
     try:
         token = get_access_token()
